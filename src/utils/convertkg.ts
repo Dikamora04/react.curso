@@ -1,0 +1,1 @@
+export const convertkg = (Ibs: number) : string => (Ibs * 0.45359237).toFixed(2);
