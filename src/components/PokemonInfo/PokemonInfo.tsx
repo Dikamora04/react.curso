@@ -6,6 +6,8 @@ import { capitilizeFirstLetter } from '../../utils/capitilizeFirtsLetter';
 import { convertcm } from "../../utils/convertcm";
 import { convertkg } from "../../utils/convertkg";
 import { PokemonSprites } from "../PokemonSprites/PokemonSprites";
+import { TypeIcon } from "../shared/TypeIcon/TypeIcon";
+
 
 export const PokemonInfo = () => {
     const { pokemonName } = useParams();
@@ -24,7 +26,14 @@ export const PokemonInfo = () => {
                 className="mx-auto w-72 h-72"/>
             </div>
             <div className='flex flex-col grow p-5 gap-3'>
+
+                <div className="relative flex">
                 <h1 className='text-3xl'>{capitilizeFirstLetter(pokemonData?.name ?? "")}</h1>
+                <TypeIcon types={pokemonData?.types ?? []} />
+                </div>
+
+                <h1 className='text-3xl'>{capitilizeFirstLetter(pokemonData?.name ?? "")}</h1>
+
                 <span>{`Peso: ${convertkg(pokemonData?.weight ?? 0)} kg `}</span>
                 <span>{`Altura: ${convertcm(pokemonData?.height ?? 0)} cm `}</span>
                 <PokemonSprites pokemonName={pokemonName}/>
