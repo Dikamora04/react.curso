@@ -2,6 +2,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-image: url(../public/assets/fondo2.jpg);
+    background-size: contain;
+    background-position: bottom;
+}
+
 .bug-background {
     background: url(../public/assets/bug.jpg);
     background-size: cover;

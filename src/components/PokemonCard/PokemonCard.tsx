@@ -6,7 +6,8 @@ import { Label } from '../shared/Label/Label';
 import { capitilizeFirstLetter } from '../../utils/capitilizeFirtsLetter';
 import { FavoriteButton } from '../shared/Button/FavoriteButton';
 import { useNavigate } from 'react-router';
-import { TypeIcon } from '../shared/TypeIcon/TypeIcon';
+import { TypeIcons } from '../shared/TypeIcon/TypeIcon';
+import { useSearchStore } from '../../store/useSearchStore';
 
 interface PokemonCardProps {
     pokemon?: PokemonListItem;
@@ -14,6 +15,7 @@ interface PokemonCardProps {
 }
 
  export const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon, pokemonId }) => {
+    const closeModal = useSearchStore((state) => state.closeModal);
     const { pokemonData } = useGetPokemon(pokemon?.name, pokemonId);
 
     const mainType = useMemo(() => pokemonData && getMainPokemonType(pokemonData), [pokemonData]);
@@ -21,12 +23,13 @@ interface PokemonCardProps {
 
     const onClick = () => {
         navigate(`/pokemon/${pokemonData?.name}`);
+        closeModal();
     }
 
     return (
         <div className={`${mainType}-background relative w-56 h-56 rounded-lg shadow-lg p-4 cursor-pointer`}>
             <FavoriteButton pokemonId={pokemonData?.id ?? 0 }/>
-            <TypeIcon types={pokemonData?.types ?? []}/>
+            <TypeIcons types={pokemonData?.types ?? []}/>
             <div className='flex flex-col items-center mx-auto' onClick={onClick}>
                 <Label>{pokemonData?.name ? capitilizeFirstLetter(pokemonData?.name) : ""}</Label>
                 <img 
